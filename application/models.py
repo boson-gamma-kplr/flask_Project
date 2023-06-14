@@ -1,13 +1,15 @@
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, func
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from flask_login import UserMixin
+import json
 
 # URL de connexion à la base de données ElephantSQL
 # Assure-toi de remplacer "<username>", "<password>", "<host>" et "<database>" par tes propres informations de connexion
-username = ""
-password = ""
-host = ""
-database = ""
+username = "igudfqsi"
+password = "7SMOHysbUXXIU9yc0dFKVFM0TW5zTQQr"
+host = "horton.db.elephantsql.com"
+database = "igudfqsi"
 url = f'postgresql://{username}:{password}@{host}/{database}'
 
 # Création de l'instance engine
@@ -17,12 +19,13 @@ engine = create_engine(url)
 Base = declarative_base()
 
 # Définition d'un modèle de table
-class User(Base):
+class User(Base, UserMixin):
     __tablename__ = 'users'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(String, primary_key=True)
     username = Column(String)
     email = Column(String)
+    password = Column(String)
 
     def __repr__(self):
         return f'User(id={self.id}, username={self.username}, email={self.email})'
@@ -31,7 +34,7 @@ class User(Base):
 Session = sessionmaker(bind=engine)
 
 # Création de l'objet SESSION
-SESSION = Session()
+session = Session()
 
 
 class IncomeExpenses(Base):
@@ -39,9 +42,16 @@ class IncomeExpenses(Base):
 
     id = Column(Integer, primary_key=True)
     type = Column(String(30), default='income')
-    # amount = Column(Float)
-    # date = Column(DateTime, default=func.now())
+    date = Column(DateTime, default=func.now())
 
     def __repr__(self):
-        return f"IncomeExpenses(id={self.id}, type={self.type})"
-        # return f"IncomeExpenses(id={self.id}, type={self.type}, amount={self.amount}, date={self.date})"
+        # return f"IncomeExpenses(id={self.id}, type={self.type})"
+        return f"'IncomeExpenses' : {{'id':'{self.id}', 'type':'{self.type}', 'date':'{self.date}'}}"
+    
+    # def serialize(self):  
+    #     return {'id':self.id, 'type':self.type, 'date':self.date}
+
+    # def toJson(self):
+    #     return json.dumps(self, default=lambda o: o.__dict__)
+    
+Base.metadata.create_all(engine)
