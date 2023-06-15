@@ -1,26 +1,24 @@
 import sys
 sys.path.extend([".","./application"])
 
+import json
 import flask
-from flask import Flask, request,redirect, url_for,jsonify
+from flask import Flask, request, url_for
 import flask_login
-from flask_login import LoginManager, login_required
-from django.utils.http import url_has_allowed_host_and_scheme
-
+from flask_login import login_required, LoginManager
+from flask_bootstrap import Bootstrap5
+from datetime import datetime
 from sqlalchemy import func
 
-import wtforms.form 
 from models import User, IncomeExpenses, session
-import json
 
-from datetime import datetime
-from flask_bootstrap import Bootstrap5
 
 login_manager = LoginManager()
 
 app = Flask(__name__)
 
 app.config["DEBUG"]=True
+
 bootstrap = Bootstrap5(app)
 
 login_manager.init_app(app)
