@@ -4,14 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
+    <!-- Inclure les liens CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Welcome {{username}}</h1>
-    <p>IncomeExpenses : </p>
-    <p>{{incomeExpenses}}</p>
-    <form id="index_form" action="" method="post">
-        <input type="submit" name="logout" value = "logout">
-        <input type="submit" name="add" value = "add entry">
-    </form>
+    <div class="container">
+        <h1 class="text-center mt-5">Welcome {{ username }}</h1>
+        <form id="index_form" action="" method="post" class="mt-4">
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <input type="submit" name="add" value="Add entry" class="btn btn-primary mr-2">
+                </div>
+                <div class="col-auto">
+                    <input type="submit" name="delete" value="Delete entry" class="btn btn-primary mr-2">
+                </div>
+                <div class="col-auto">
+                    <input type="submit" name="dashboard" value="Dashboard" class="btn btn-primary mr-2">
+                </div>
+                <div class="col-auto">
+                    <input type="submit" name="profile" value="View profile" class="btn btn-primary mr-2">
+                </div>
+                <div class="col-auto">
+                    <input type="submit" name="logout" value="Logout" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+        <p>Incomes and Expenses :</p>
+        <pre>{{ incomeExpenses }}</pre>
+    </div>
+
+    <!-- Inclure les scripts JavaScript de Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

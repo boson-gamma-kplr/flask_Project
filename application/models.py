@@ -28,7 +28,7 @@ class User(Base, UserMixin):
     password = Column(String)
 
     def __repr__(self):
-        return f'User(id={self.id}, username={self.username}, email={self.email})'
+        return f'{{"id":"{self.id}", "username":"{self.username}", "email":"{self.email}"}}'
     
 # Création de la classe Session
 Session = sessionmaker(bind=engine)
@@ -43,15 +43,11 @@ class IncomeExpenses(Base):
     id = Column(Integer, primary_key=True)
     type = Column(String(30), default='income')
     date = Column(DateTime, default=func.now())
+    amount = Column(Float, default=0.0)
+    category = Column(String(30), default='misc')
 
     def __repr__(self):
         # return f"IncomeExpenses(id={self.id}, type={self.type})"
-        return f"'IncomeExpenses' : {{'id':'{self.id}', 'type':'{self.type}', 'date':'{self.date}'}}"
-    
-    # def serialize(self):  
-    #     return {'id':self.id, 'type':self.type, 'date':self.date}
-
-    # def toJson(self):
-    #     return json.dumps(self, default=lambda o: o.__dict__)
+        return f'{{"id":"{self.id}", "date":"{self.date}", "type":"{self.type}", "category":"{self.category}", "amount":"{self.amount}"}}'
     
 Base.metadata.create_all(engine)
