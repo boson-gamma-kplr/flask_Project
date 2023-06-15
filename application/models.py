@@ -2,7 +2,6 @@ from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from flask_login import UserMixin
-import json
 
 # URL de connexion à la base de données ElephantSQL
 # Assure-toi de remplacer "<username>", "<password>", "<host>" et "<database>" par tes propres informations de connexion
